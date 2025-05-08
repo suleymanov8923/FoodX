@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restoran Sifariş Sistemi</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff5e6;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 20px 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        text {
+            background-color: #ff4d4d;
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 12px 20px;
+            width: 60%;
+            margin: 20px 0;
+            border: 2px solid #ffcc00;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .restaurant-btn {
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 25px;
+            margin: 10px;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .restaurant-btn:hover {
+            background-color: #ff9900;
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .menu {
+            margin-top: 30px;
+        }
+
+        .menu img {
+            width: 90%;
+            max-width: 600px; /* Böyük ekranlarda maksimum 600px */
+            height: auto;
+            margin: 15px auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            display: block;
+        }
+
+        .menu img:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Sifariş : 050 789 83 86
+    </header>
+    <div class  ="text">
+        <p><b>RESTORANLARIN
+            MENYULARI</b></p>
+    </div>
+    <input type="text" id="searchBox" placeholder="Restoran adı axtarın..." onkeyup="searchRestaurants()">
+
+    <div id="restaurantList">
+        <button class="restaurant-btn" onclick="showMenu('lovePizza')">I Love Pizza</button>
+        <button class="restaurant-btn" onclick="showMenu('sushiEvi')">Sushi Qəbələ</button>
+        <button class="restaurant-btn" onclick="showMenu('zyfancs')">Qəbələ Əyləncə Mərkəzi</button>
+        <button class="restaurant-btn" onclick="showMenu('mkabab')">3 manat kabab evi</button>
+        <button class="restaurant-btn" onclick="showMenu('fantan')">Fontan</button>
+    </div>
+
+    <div class="menu" id="menuArea"></div>
+
+    <script>
+        function searchRestaurants() {
+            let input = document.getElementById('searchBox').value.toLowerCase();
+            let buttons = document.getElementsByClassName('restaurant-btn');
+            for (let btn of buttons) {
+                let text = btn.innerText.toLowerCase();
+                btn.style.display = text.includes(input) ? 'inline-block' : 'none';
+            }
+        }
+
+        function showMenu(restaurant) {
+            let menuArea = document.getElementById('menuArea');
+            menuArea.innerHTML = ''; // Əvvəlki menyunu təmizlə
+
+            // Hər restoran üçün şəkillərin adlarını daxil edirik
+            let images = {
+                lovePizza: ["pizza1.png", "pizza2.png"],
+                sushiEvi: ["susi.png", "susi1.png", "susi2.png", "susi3.png", "susi4.png", "susi5.png", "susi6.png", "susi7.png", "susi8.png", "susi9.png", "susi10.png", "susi11.png"],
+                zyfancs: ["qəm.png", "qəm2.png" , "qəm3.png" , "qəm4.png", "qəm5.png", "qəm6.png", "qəm7.png", "qəm8.png"],
+                fantan: ["fnt.png", "fnt1.png", "fnt2.png", "fnt3.png", "fnt4.png", "fnt5.png", "fnt6.png", "fnt7.png", "fnt8.png", "fnt9.png", "fnt10.png", "fnt11.png", "fnt12.png", "fnt13.png", "fnt14.png", "fnt15.png", "fnt16.png", "fnt17.png", "fnt18.png", "fnt19.png", "fnt20.png"],
+                mkabab: ["kabab1.png", "kabab2.png", "kabab3.png", "kabab4.png", "kabab5.png", "kabab6.png"]
+            };
+            if (images[restaurant]) {
+                for (let img of images[restaurant]) {
+                    let imageElement = document.createElement('img');
+                    imageElement.src = img;
+                    menuArea.appendChild(imageElement);
+                }
+            } else {
+                menuArea.innerHTML = 'Menyu tapılmadı.';
+            }
+        }
+    </script>
+
+</body>
+</html>
